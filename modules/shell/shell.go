@@ -2,6 +2,7 @@ package shell
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
 
@@ -9,23 +10,15 @@ import (
 	"github.com/kyokomi/emoji"
 )
 
-func completer(document prompt.Document) []prompt.Suggest {
-	suggestions := []prompt.Suggest{
-		{Text: "create", Description: "create a new resource"},
-		{Text: "entity", Description: "create a new entity and describe database storage"},
-	}
-	return prompt.FilterHasPrefix(suggestions, document.GetWordBeforeCursor(), true)
-}
-
 // Init the shell to take input from user
 func Init() {
-	welcomeMessage := emoji.Sprint("Welcome to the :tiger: shell")
+	welcomeMessage := emoji.Sprintf("Welcome to the :tiger: shell.\n This shell has autocomplete to make your work easy !")
 	fmt.Println(welcomeMessage)
 
-	// command := "init"
+	columns := make([]string, 1)
 	for true {
 		command := prompt.Input(" > ", entity.AutoComplete,
-			prompt.OptionTitle("sql-prompt"),
+			prompt.OptionTitle("Bird Nest"),
 			prompt.OptionHistory([]string{"exit"}),
 			prompt.OptionPrefixTextColor(prompt.Yellow),
 			prompt.OptionPreviewSuggestionTextColor(prompt.Blue),
@@ -34,8 +27,12 @@ func Init() {
 		if command == "exit" {
 			break
 		} else {
-			fmt.Println("query > " + command)
+			if strings.TrimSpace(command) != "" {
+				columns = append(columns, command)
+			}
 		}
 	}
+
+	entity.Process(columns)
 
 }
