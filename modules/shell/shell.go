@@ -15,7 +15,7 @@ func Init() {
 	welcomeMessage := emoji.Sprintf("Welcome to the :tiger: shell.\n This shell has autocomplete to make your work easy !")
 	fmt.Println(welcomeMessage)
 
-	columns := make([]string, 1)
+	columns := make([]string, 0)
 	for true {
 		command := prompt.Input(" > ", entity.AutoComplete,
 			prompt.OptionTitle("Bird Nest"),

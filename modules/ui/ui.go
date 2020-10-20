@@ -15,3 +15,9 @@ func Description(description string) {
 	descriptionStyling := color.New(color.FgMagenta).Add(color.Italic)
 	descriptionStyling.Println(description)
 }
+
+// Error : formatting for error messages
+func Error(errorMessage string) {
+	errorMessageStyling := color.New(color.FgHiRed)
+	errorMessageStyling.Println("[error] " + errorMessage)
+}

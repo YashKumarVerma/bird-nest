@@ -5,8 +5,20 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/YashKumarVerma/bird-nest/modules/ui"
 	"github.com/c-bata/go-prompt"
 )
+
+type commandStructureChecks struct {
+	name          string
+	primary       bool
+	datatype      string
+	autoIncrement bool
+	length        int32
+	array         bool
+	unique        bool
+	defaultValue  string
+}
 
 // ValidCommands :
 var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default"}
@@ -42,7 +54,7 @@ func Process(commands []string) {
 	// check all input commands for grammar mistakes
 	for _, command := range commands {
 		if !checkIfGrammarCorrect(command) {
-			fmt.Println("[error] Invalid syntax of ", command)
+			ui.Error("Invalid syntax in line : " + command)
 		}
 	}
 }
