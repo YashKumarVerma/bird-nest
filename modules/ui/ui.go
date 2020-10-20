@@ -21,3 +21,9 @@ func Error(errorMessage string) {
 	errorMessageStyling := color.New(color.FgHiRed)
 	errorMessageStyling.Println("[error] " + errorMessage)
 }
+
+// Info : formatting for info messages
+func Info(infoMessage string) {
+	infoMessageStyling := color.New(color.FgHiCyan)
+	infoMessageStyling.Println("[info] " + infoMessage)
+}
