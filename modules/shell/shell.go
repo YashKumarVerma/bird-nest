@@ -28,7 +28,7 @@ func Init() {
 			break
 		} else {
 			if strings.TrimSpace(command) != "" {
-				columns = append(columns, command)
+				columns = append(columns, strings.TrimSpace(command))
 			}
 		}
 	}

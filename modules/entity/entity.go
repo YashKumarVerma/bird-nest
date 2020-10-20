@@ -9,12 +9,12 @@ import (
 	"github.com/c-bata/go-prompt"
 )
 
-type commandStructureChecks struct {
+type structuredCommandData struct {
 	name          string
 	primary       bool
 	datatype      string
 	autoIncrement bool
-	length        int32
+	length        int
 	array         bool
 	unique        bool
 	defaultValue  string
@@ -22,9 +22,6 @@ type commandStructureChecks struct {
 
 // ValidCommands :
 var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default"}
-
-// ValidTypes :
-var ValidTypes = []string{"int", "string", "bool", "date", "enum"}
 
 // auxillary function to check if item exists in particular array
 func in(haystack []string, needle string) bool {
@@ -47,6 +44,60 @@ func checkIfGrammarCorrect(command string) bool {
 	return true
 }
 
+func parseAllCommandData(command string) structuredCommandData {
+	var data structuredCommandData
+	tokens := strings.Split(command, " ")
+
+	for _, value := range tokens {
+		var val string
+		keyValue := strings.Split(value, ":")
+		key := strings.ReplaceAll(keyValue[0], "--", "")
+		if len(keyValue) > 1 {
+			val = keyValue[1]
+		} else {
+			val = "true"
+		}
+
+		switch key {
+
+		case "name":
+			{
+				data.name = val
+			}
+		case "primary":
+			{
+				data.primary = val == "true"
+			}
+		case "type":
+			{
+				data.datatype = val
+			}
+		case "auto_increment":
+			{
+				data.autoIncrement = val == "true"
+			}
+		case "length":
+			{
+				numericValue, _ := strconv.Atoi(val)
+				data.length = numericValue
+			}
+		case "array":
+			{
+				data.array = val == "true"
+			}
+		case "unique":
+			{
+				data.unique = val == "true"
+			}
+		case "default":
+			{
+				data.defaultValue = val
+			}
+		}
+	}
+	return data
+}
+
 // Process the result from shell to generate a detailed schema
 func Process(commands []string) {
 	fmt.Println("processing schema, total " + strconv.Itoa(len(commands)))
@@ -54,7 +105,10 @@ func Process(commands []string) {
 	// check all input commands for grammar mistakes
 	for _, command := range commands {
 		if !checkIfGrammarCorrect(command) {
-			ui.Error("Invalid syntax in line : " + command)
+			ui.Error("Invalid grammar : " + command)
+		} else {
+			ui.Info("parsing all data from command")
+			fmt.Println(parseAllCommandData(command))
 		}
 	}
 }
@@ -70,9 +124,8 @@ func AutoComplete(document prompt.Document) []prompt.Suggest {
 		{Text: "--type:string", Description: "datatype of column as string"},
 		{Text: "--type:boolean", Description: "datatype of column as boolean"},
 		{Text: "--type:date", Description: "datatype of column as date"},
-		{Text: "--type:enum", Description: "followed by comma separated enum values"},
 
-		{Text: "--length", Description: "stores an array"},
+		{Text: "--length:10", Description: "stores an array"},
 		{Text: "--array", Description: "stores an array"},
 		{Text: "--unique", Description: "datatype of column as boolean"},
 		{Text: "--default:val", Description: "default value of field"},
