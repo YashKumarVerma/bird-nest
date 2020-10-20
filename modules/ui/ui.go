@@ -1,6 +1,8 @@
 package ui
 
 import (
+	"fmt"
+
 	"github.com/fatih/color"
 )
 
@@ -26,4 +28,11 @@ func Error(errorMessage string) {
 func Info(infoMessage string) {
 	infoMessageStyling := color.New(color.FgHiCyan)
 	infoMessageStyling.Println("[info] " + infoMessage)
+}
+
+// ContextPrint to print beautiful messages
+func ContextPrint(context string, message string) {
+	contextStyling := color.New(color.FgGreen)
+	contextStyling.Print("[ " + context + "] ")
+	fmt.Println(message)
 }

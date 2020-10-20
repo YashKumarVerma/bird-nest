@@ -109,7 +109,7 @@ func Process(commands []string) []StructuredCommandData {
 		if !checkIfGrammarCorrect(command) {
 			ui.Error("Invalid grammar : " + command)
 		} else {
-			ui.Info("parsing all data from command")
+			// ui.Info("parsing all data from command")
 			entitySchemas = append(entitySchemas, parseAllCommandData(command))
 			parseAllCommandData(command)
 		}
