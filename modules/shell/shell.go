@@ -15,6 +15,7 @@ func Init() {
 	welcomeMessage := emoji.Sprintf("Welcome to the :tiger: shell.\n This shell has autocomplete to make your work easy !")
 	fmt.Println(welcomeMessage)
 
+	var entitySchemas []entity.StructuredCommandData
 	columns := make([]string, 0)
 	for true {
 		command := prompt.Input(" > ", entity.AutoComplete,
@@ -33,6 +34,7 @@ func Init() {
 		}
 	}
 
-	entity.Process(columns)
+	entitySchemas = entity.Process(columns)
+	_ = entitySchemas
 
 }

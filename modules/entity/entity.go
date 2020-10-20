@@ -9,18 +9,19 @@ import (
 	"github.com/c-bata/go-prompt"
 )
 
-type structuredCommandData struct {
-	name          string
-	primary       bool
-	datatype      string
-	autoIncrement bool
-	length        int
-	array         bool
-	unique        bool
-	defaultValue  string
+// StructuredCommandData to share data to generators
+type StructuredCommandData struct {
+	Name          string
+	Primary       bool
+	Datatype      string
+	AutoIncrement bool
+	Length        int
+	Array         bool
+	Unique        bool
+	DefaultValue  string
 }
 
-// ValidCommands :
+// ValidCommands : list of all commands that are accepted by shell
 var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default"}
 
 // auxillary function to check if item exists in particular array
@@ -44,8 +45,8 @@ func checkIfGrammarCorrect(command string) bool {
 	return true
 }
 
-func parseAllCommandData(command string) structuredCommandData {
-	var data structuredCommandData
+func parseAllCommandData(command string) StructuredCommandData {
+	var data StructuredCommandData
 	tokens := strings.Split(command, " ")
 
 	for _, value := range tokens {
@@ -62,36 +63,36 @@ func parseAllCommandData(command string) structuredCommandData {
 
 		case "name":
 			{
-				data.name = val
+				data.Name = val
 			}
 		case "primary":
 			{
-				data.primary = val == "true"
+				data.Primary = val == "true"
 			}
 		case "type":
 			{
-				data.datatype = val
+				data.Datatype = val
 			}
 		case "auto_increment":
 			{
-				data.autoIncrement = val == "true"
+				data.AutoIncrement = val == "true"
 			}
 		case "length":
 			{
 				numericValue, _ := strconv.Atoi(val)
-				data.length = numericValue
+				data.Length = numericValue
 			}
 		case "array":
 			{
-				data.array = val == "true"
+				data.Array = val == "true"
 			}
 		case "unique":
 			{
-				data.unique = val == "true"
+				data.Unique = val == "true"
 			}
 		case "default":
 			{
-				data.defaultValue = val
+				data.DefaultValue = val
 			}
 		}
 	}
@@ -99,18 +100,23 @@ func parseAllCommandData(command string) structuredCommandData {
 }
 
 // Process the result from shell to generate a detailed schema
-func Process(commands []string) {
+func Process(commands []string) []StructuredCommandData {
 	fmt.Println("processing schema, total " + strconv.Itoa(len(commands)))
 
-	// check all input commands for grammar mistakes
+	// expand each schema and generate a structure of all processed data
+	entitySchemas := make([]StructuredCommandData, 0)
 	for _, command := range commands {
 		if !checkIfGrammarCorrect(command) {
 			ui.Error("Invalid grammar : " + command)
 		} else {
 			ui.Info("parsing all data from command")
-			fmt.Println(parseAllCommandData(command))
+			entitySchemas = append(entitySchemas, parseAllCommandData(command))
+			parseAllCommandData(command)
 		}
 	}
+
+	// return array of structures
+	return entitySchemas
 }
 
 // AutoComplete provides suggestions to user
