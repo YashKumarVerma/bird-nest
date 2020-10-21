@@ -10,6 +10,16 @@ import (
 	"github.com/kyokomi/emoji"
 )
 
+// WriteAsPerDataType  to write data as per datatype regulations
+func WriteAsPerDataType(entity entity.StructuredCommandData, data string) string {
+
+	if entity.Datatype == "int" || entity.Datatype == "boolean" {
+		return data
+	}
+
+	return "\"" + data + "\""
+}
+
 // WriteDataToDisk to write data to generated directory
 func writeDataToDisk(filename string, dataToWrite string) bool {
 	// if directory doesn't exist, then create it

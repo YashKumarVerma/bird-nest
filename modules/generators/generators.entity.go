@@ -11,16 +11,6 @@ import (
 	"github.com/YashKumarVerma/bird-nest/modules/ui"
 )
 
-// function to write data as per datatype regulations
-func writeAsPerDataType(entity entity.StructuredCommandData, data string) string {
-
-	if entity.Datatype == "int" || entity.Datatype == "boolean" {
-		return data
-	}
-
-	return "\"" + data + "\""
-}
-
 // generate javascript code for given struct
 func generateNativeJsFromStruct(entity entity.StructuredCommandData) string {
 	var js string
@@ -37,12 +27,12 @@ func generateNativeJsFromStruct(entity entity.StructuredCommandData) string {
 
 	// set default property
 	if entity.DefaultValue != "" {
-		config += "default : " + writeAsPerDataType(entity, entity.DefaultValue) + " ,"
+		config += "default : " + WriteAsPerDataType(entity, entity.DefaultValue) + " ,"
 	}
 
 	// set length property
 	if entity.Length != 0 {
-		config += "length : " + writeAsPerDataType(entity, strconv.Itoa(entity.Length)) + " ,"
+		config += "length : " + WriteAsPerDataType(entity, strconv.Itoa(entity.Length)) + " ,"
 	}
 
 	// set unique property
