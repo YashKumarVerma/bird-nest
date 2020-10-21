@@ -9,34 +9,11 @@ export class {{MODULE_NAME}}Repository extends Repository<{{MODULE_NAME}}> {
   /** New {{MODULE_NAME}} Registration */
   async create{{MODULE_NAME}}(create{{MODULE_NAME}}Dto: Create{{MODULE_NAME}}Dto): Promise<{{MODULE_NAME}}> {
     const {
-    //   name,
-    //   department,
-    //   regno,
-    //   gender,
-    //   email_college,
-    //   email_personal,
-    //   instagram,
-    //   twitter,
-    //   isAlumni,
-    //   isBoard{{MODULE_NAME}},
-    //   linkedIn,
-    //   github,
+{{DESTRUCTURING}}
     } = create{{MODULE_NAME}}Dto;
 
     const {{MODULE_NAME_LOWER}} = this.create();
-    // {{MODULE_NAME}}.name = name;
-    // {{MODULE_NAME}}.department = department;
-    // {{MODULE_NAME}}.regno = regno;
-    // {{MODULE_NAME}}.gender = gender;
-    // {{MODULE_NAME}}.email_college = email_college;
-    // {{MODULE_NAME}}.email_personal = email_personal;
-    // {{MODULE_NAME}}.instagram = instagram;
-    // {{MODULE_NAME}}.twitter = twitter;
-    // {{MODULE_NAME}}.isAlumni = isAlumni;
-    // {{MODULE_NAME}}.isBoard{{MODULE_NAME}} = isBoard{{MODULE_NAME}};
-    // {{MODULE_NAME}}.linkedIn = linkedIn;
-    // {{MODULE_NAME}}.github = github;
-
+{{ASSIGNMENT}}
     try {
       await {{MODULE_NAME_LOWER}}.save();
     } catch (error) {
@@ -51,6 +28,7 @@ export class {{MODULE_NAME}}Repository extends Repository<{{MODULE_NAME}}> {
 
   /** filter {{MODULE_NAME_LOWER}}  */
   async get{{MODULE_NAME}}(filterDto: Get{{MODULE_NAME}}FilterDto): Promise<{{MODULE_NAME}}[]> {
+    //@NeedsManualIntervention
     const { department } = filterDto;
     const query = this.createQueryBuilder('{{MODULE_NAME_LOWER}}');
 

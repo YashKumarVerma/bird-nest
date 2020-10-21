@@ -12,7 +12,7 @@ import (
 )
 
 // generate javascript code for given struct
-func generateNativeJsFromStruct(entity entity.StructuredCommandData) string {
+func generateNativeJsFromStructForEntity(entity entity.StructuredCommandData) string {
 	var js string
 	var config string
 
@@ -91,7 +91,7 @@ func EntityGenerator(moduleName string, schema []entity.StructuredCommandData) (
 	// append data to generate final string
 	var codeString string
 	for _, command := range schema {
-		codeString += generateNativeJsFromStruct(command)
+		codeString += generateNativeJsFromStructForEntity(command)
 	}
 	moduleName = strings.Title(strings.ToLower(moduleName))
 	filledTemplate := strings.ReplaceAll(string(templateData), "{{MAIN_WORKSPACE}}", codeString)
