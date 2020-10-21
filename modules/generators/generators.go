@@ -51,6 +51,7 @@ func Init(moduleName string, schemas []entity.StructuredCommandData) {
 	// generate .entity.ts file
 	writeDataToDisk(EntityGenerator(moduleName, schemas))
 	writeDataToDisk(RepositoryGenerator(moduleName, schemas))
+	writeDataToDisk(ServiceGenerator(moduleName, schemas))
 
 	ui.ContextPrint(emoji.Sprint(":gear:"), "engine stopping")
 }
