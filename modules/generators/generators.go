@@ -53,6 +53,7 @@ func Init(moduleName string, schemas []entity.StructuredCommandData) {
 	writeDataToDisk(RepositoryGenerator(moduleName, schemas))
 	writeDataToDisk(ServiceGenerator(moduleName, schemas))
 	writeDataToDisk(ModuleGenerator(moduleName, schemas))
+	writeDataToDisk(ControllerGenerator(moduleName, schemas))
 
 	ui.ContextPrint(emoji.Sprint(":gear:"), "engine stopping")
 }
