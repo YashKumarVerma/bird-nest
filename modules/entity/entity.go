@@ -16,14 +16,13 @@ type StructuredCommandData struct {
 	Datatype      string
 	AutoIncrement bool
 	Length        int
-	Array         bool
 	Unique        bool
 	DefaultValue  string
 	Null          bool
 }
 
 // ValidCommands : list of all commands that are accepted by shell
-var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default", "--null"}
+var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--unique", "--default", "--null"}
 
 // auxillary function to check if item exists in particular array
 func in(haystack []string, needle string) bool {
@@ -83,10 +82,6 @@ func parseAllCommandData(command string) StructuredCommandData {
 				numericValue, _ := strconv.Atoi(val)
 				data.Length = numericValue
 			}
-		case "array":
-			{
-				data.Array = val == "true"
-			}
 		case "unique":
 			{
 				data.Unique = val == "true"
@@ -136,7 +131,7 @@ func AutoComplete(document prompt.Document) []prompt.Suggest {
 		{Text: "--type:boolean", Description: "datatype of column as boolean"},
 		{Text: "--type:date", Description: "datatype of column as date"},
 
-		{Text: "--length:10", Description: "stores an array"},
+		{Text: "--length:10", Description: "length of the text field"},
 		{Text: "--array", Description: "stores an array"},
 		{Text: "--unique", Description: "datatype of column as boolean"},
 		{Text: "--null", Description: "datatype of column can be null"},
