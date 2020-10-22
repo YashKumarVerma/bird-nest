@@ -19,10 +19,11 @@ type StructuredCommandData struct {
 	Array         bool
 	Unique        bool
 	DefaultValue  string
+	Null          bool
 }
 
 // ValidCommands : list of all commands that are accepted by shell
-var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default"}
+var validCommands = []string{"--name", "--primary", "--type", "--auto_increment", "--length", "--array", "--unique", "--default", "--null"}
 
 // auxillary function to check if item exists in particular array
 func in(haystack []string, needle string) bool {
@@ -90,6 +91,10 @@ func parseAllCommandData(command string) StructuredCommandData {
 			{
 				data.Unique = val == "true"
 			}
+		case "null":
+			{
+				data.Null = val == "true"
+			}
 		case "default":
 			{
 				data.DefaultValue = val
@@ -134,6 +139,7 @@ func AutoComplete(document prompt.Document) []prompt.Suggest {
 		{Text: "--length:10", Description: "stores an array"},
 		{Text: "--array", Description: "stores an array"},
 		{Text: "--unique", Description: "datatype of column as boolean"},
+		{Text: "--null", Description: "datatype of column can be null"},
 		{Text: "--default:val", Description: "default value of field"},
 	}
 	return prompt.FilterHasPrefix(suggestions, document.GetWordBeforeCursor(), true)

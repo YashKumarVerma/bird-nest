@@ -5,8 +5,6 @@ import (
 	"strings"
 
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
-	"github.com/YashKumarVerma/bird-nest/modules/ui"
-	"github.com/kyokomi/emoji"
 )
 
 // function to generate destructuring commands
@@ -46,7 +44,6 @@ func RepositoryGenerator(moduleName string, schema []entity.StructuredCommandDat
 
 	// print the data to console
 	// ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".repository.ts")
-	ui.ContextPrint(emoji.Sprint(":construction:"), "needs attention as filter needs to be done manually")
 
 	// write template file to directory
 	return repositoryOutputFile, filledTemplate, moduleName

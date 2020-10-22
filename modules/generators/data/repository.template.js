@@ -29,12 +29,12 @@ export class {{MODULE_NAME}}Repository extends Repository<{{MODULE_NAME}}> {
   /** filter {{MODULE_NAME_LOWER}}  */
   async get{{MODULE_NAME}}(filterDto: Get{{MODULE_NAME}}FilterDto): Promise<{{MODULE_NAME}}[]> {
     //@NeedsManualIntervention
-    const { department } = filterDto;
+    const { } = filterDto;
     const query = this.createQueryBuilder('{{MODULE_NAME_LOWER}}');
 
-    if (department) {
-      query.andWhere('{{MODULE_NAME}}.department = :department', { department });
-    }
+    // if (department) {
+    //   query.andWhere('{{MODULE_NAME}}.department = :department', { department });
+    // }
 
     const result = await query.getMany();
     return result;

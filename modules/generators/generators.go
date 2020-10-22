@@ -71,8 +71,12 @@ func Init(moduleName string, schemas []entity.StructuredCommandData) {
 	writeDataToDisk(ServiceGenerator(moduleName, schemas))
 	writeDataToDisk(ModuleGenerator(moduleName, schemas))
 	writeDataToDisk(ControllerGenerator(moduleName, schemas))
+	writeDataToDisk(DtoCreateGenerator(moduleName, schemas))
+	writeDataToDisk(DtoFilterGenerator(moduleName, schemas))
+	writeDataToDisk(DtoUpdateGenerator(moduleName, schemas))
 
 	ui.ContextPrint(emoji.Sprint(":gear:"), "engine stopping")
+	ui.ContextPrint(emoji.Sprint(":construction:"), "search for @NeedsManualIntervention for all places where manual edits are needed")
 }
 
 // Check if error exists, panic

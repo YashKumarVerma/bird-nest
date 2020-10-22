@@ -3,5 +3,5 @@ import {  } from './{{MODULE_NAME}}.enum';
 
 @Entity()
 export class {{MODULE_NAME}} extends BaseEntity {
- {{MAIN_WORKSPACE}}
+{{MAIN_WORKSPACE}}
 }
