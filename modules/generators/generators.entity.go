@@ -78,7 +78,7 @@ func generateNativeJsFromStructForEntity(entity entity.StructuredCommandData) st
 }
 
 // EntityGenerator : function to generate *.entity.ts file
-func EntityGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string) {
+func EntityGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string, string) {
 	// ui.ContextPrint(emoji.Sprint(":bird:"), "starting "+moduleName+".entity.ts")
 	// filenames to access data from
 	entityTemplateFile := "modules/generators/data/entity.template.js"
@@ -101,5 +101,5 @@ func EntityGenerator(moduleName string, schema []entity.StructuredCommandData) (
 	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".entity.ts")
 
 	// write template file to directory
-	return entityOutputFile, filledTemplate
+	return entityOutputFile, filledTemplate, moduleName
 }

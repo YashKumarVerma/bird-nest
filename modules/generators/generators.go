@@ -21,17 +21,32 @@ func WriteAsPerDataType(entity entity.StructuredCommandData, data string) string
 }
 
 // WriteDataToDisk to write data to generated directory
-func writeDataToDisk(filename string, dataToWrite string) bool {
-	// if directory doesn't exist, then create it
+func writeDataToDisk(filename string, dataToWrite string, moduleName string) bool {
+	// ensure that generated directory exists
 	_, err := os.Stat("./generated")
 	if os.IsNotExist(err) {
 		dirError := os.MkdirAll("./generated", 0755)
-		ui.ContextPrint(emoji.Sprint(":package:"), "folder created : generated")
 		Check(dirError, "cannot create directory to put fresh content")
+		ui.ContextPrint(emoji.Sprint(":package:"), "folder created : generated")
 	}
 
+	// ensure that directory with module name exists
+	_, err = os.Stat("./generated/" + moduleName)
+	if os.IsNotExist(err) {
+		moduleDirErr := os.MkdirAll("./generated/"+moduleName, 0755)
+		Check(moduleDirErr, "cannot create directory to put module content")
+		ui.ContextPrint(emoji.Sprint(":package:"), "folder created : generated/"+moduleName)
+	}
+
+	// ensure that dto directory exists
+	_, err = os.Stat("./generated/" + moduleName + "/dto")
+	if os.IsNotExist(err) {
+		DtoErr := os.MkdirAll("./generated/"+moduleName+"/dto", 0755)
+		Check(DtoErr, "cannot create directory to put dto content")
+		ui.ContextPrint(emoji.Sprint(":package:"), "folder created : generated/"+moduleName+"/dto")
+	}
 	// write data to file
-	codeFile, err := os.Create("./generated/" + filename)
+	codeFile, err := os.Create("./generated/" + moduleName + "/" + filename)
 	Check(err, "error creating "+filename)
 
 	codeBytes, err := codeFile.WriteString(dataToWrite)

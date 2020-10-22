@@ -10,7 +10,7 @@ import (
 )
 
 // ControllerGenerator : function to generate *.controller.ts file
-func ControllerGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string) {
+func ControllerGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string, string) {
 	// filenames to access data from
 	controllerTemplateFile := "modules/generators/data/controller.template.js"
 	controllerOutputFile := strings.ToLower(moduleName) + ".controller.ts"
@@ -29,5 +29,5 @@ func ControllerGenerator(moduleName string, schema []entity.StructuredCommandDat
 	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".controller.ts")
 
 	// write template file to directory
-	return controllerOutputFile, filledTemplate
+	return controllerOutputFile, filledTemplate, moduleName
 }

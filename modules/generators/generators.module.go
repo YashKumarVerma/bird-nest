@@ -10,7 +10,7 @@ import (
 )
 
 // ModuleGenerator : function to generate *.service.ts file
-func ModuleGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string) {
+func ModuleGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string, string) {
 	// filenames to access data from
 	serviceTemplateFile := "modules/generators/data/module.template.js"
 	serviceOutputFile := strings.ToLower(moduleName) + ".module.ts"
@@ -29,5 +29,5 @@ func ModuleGenerator(moduleName string, schema []entity.StructuredCommandData) (
 	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".module.ts")
 
 	// write template file to directory
-	return serviceOutputFile, filledTemplate
+	return serviceOutputFile, filledTemplate, moduleName
 }

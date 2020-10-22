@@ -20,7 +20,7 @@ func generateAssignmentString(command entity.StructuredCommandData) string {
 }
 
 // RepositoryGenerator : function to generate *.repository.ts file
-func RepositoryGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string) {
+func RepositoryGenerator(moduleName string, schema []entity.StructuredCommandData) (string, string, string) {
 	// filenames to access data from
 	repositoryTemplateFile := "modules/generators/data/repository.template.js"
 	repositoryOutputFile := strings.ToLower(moduleName) + ".repository.ts"
@@ -49,5 +49,5 @@ func RepositoryGenerator(moduleName string, schema []entity.StructuredCommandDat
 	ui.ContextPrint(emoji.Sprint(":construction:"), "needs attention as filter needs to be done manually")
 
 	// write template file to directory
-	return repositoryOutputFile, filledTemplate
+	return repositoryOutputFile, filledTemplate, moduleName
 }
