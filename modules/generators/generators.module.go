@@ -5,8 +5,6 @@ import (
 	"strings"
 
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
-	"github.com/YashKumarVerma/bird-nest/modules/ui"
-	"github.com/kyokomi/emoji"
 )
 
 // ModuleGenerator : function to generate *.service.ts file
@@ -26,7 +24,7 @@ func ModuleGenerator(moduleName string, schema []entity.StructuredCommandData) (
 	filledTemplate = strings.ReplaceAll(filledTemplate, "{{MODULE_NAME_LOWER}}", moduleNameLower)
 
 	// print the data to console
-	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".module.ts")
+	// ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".module.ts")
 
 	// write template file to directory
 	return serviceOutputFile, filledTemplate, moduleName

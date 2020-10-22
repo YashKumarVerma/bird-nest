@@ -5,10 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kyokomi/emoji"
-
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
-	"github.com/YashKumarVerma/bird-nest/modules/ui"
 )
 
 // generate javascript code for given struct
@@ -98,7 +95,7 @@ func EntityGenerator(moduleName string, schema []entity.StructuredCommandData) (
 	filledTemplate = strings.ReplaceAll(filledTemplate, "{{MODULE_NAME}}", moduleName)
 
 	// print the data to console
-	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".entity.ts")
+	// ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".entity.ts")
 
 	// write template file to directory
 	return entityOutputFile, filledTemplate, moduleName

@@ -45,7 +45,7 @@ func RepositoryGenerator(moduleName string, schema []entity.StructuredCommandDat
 	filledTemplate = strings.ReplaceAll(filledTemplate, "{{MODULE_NAME_LOWER}}", moduleNameLower)
 
 	// print the data to console
-	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".repository.ts")
+	// ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".repository.ts")
 	ui.ContextPrint(emoji.Sprint(":construction:"), "needs attention as filter needs to be done manually")
 
 	// write template file to directory

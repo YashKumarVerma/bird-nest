@@ -3,6 +3,7 @@ package generators
 import (
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
 	"github.com/YashKumarVerma/bird-nest/modules/ui"
@@ -22,6 +23,7 @@ func WriteAsPerDataType(entity entity.StructuredCommandData, data string) string
 
 // WriteDataToDisk to write data to generated directory
 func writeDataToDisk(filename string, dataToWrite string, moduleName string) bool {
+	moduleName = strings.ToLower(moduleName)
 	// ensure that generated directory exists
 	_, err := os.Stat("./generated")
 	if os.IsNotExist(err) {

@@ -5,8 +5,6 @@ import (
 	"strings"
 
 	"github.com/YashKumarVerma/bird-nest/modules/entity"
-	"github.com/YashKumarVerma/bird-nest/modules/ui"
-	"github.com/kyokomi/emoji"
 )
 
 // ControllerGenerator : function to generate *.controller.ts file
@@ -26,7 +24,7 @@ func ControllerGenerator(moduleName string, schema []entity.StructuredCommandDat
 	filledTemplate = strings.ReplaceAll(filledTemplate, "{{MODULE_NAME_LOWER}}", moduleNameLower)
 
 	// print the data to console
-	ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".controller.ts")
+	// ui.ContextPrint(emoji.Sprint(":bird:"), "finished "+moduleName+".controller.ts")
 
 	// write template file to directory
 	return controllerOutputFile, filledTemplate, moduleName
